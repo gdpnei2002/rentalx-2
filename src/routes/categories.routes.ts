@@ -11,7 +11,7 @@ categoriesRoutes.post("/categories", (request, response) =>{
         name,
         description,
     })
-    return response.status(201);
+    return response.status(201).send();
 })
 
 export { categoriesRoutes}
