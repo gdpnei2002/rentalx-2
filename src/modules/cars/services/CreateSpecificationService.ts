@@ -1,6 +1,30 @@
-class CreateSpecificationService {
-    execute () {
-     console.log("TODd 5");
-    }
+import { ISpecificationsRepository } from "../repositories/ISpecificationsRepository";
+
+interface IRequest {
+  name: string;
+  description: string;
 }
-  export { CreateSpecificationService }; 
+
+class CreateSpecificationService {
+  static execute(arg0: { name: any; description: any; }) {
+      throw new Error("Method not implemented.");
+  }
+  constructor(private specificationsRepository: ISpecificationsRepository) {}
+  execute({ name, description }: IRequest): void {
+    const specificationAlreadyExists = this.specificationsRepository.findByName(
+      name);
+    
+
+    if(specificationAlreadyExists){
+      throw new Error("Specification already exists")
+    }
+    
+   this.specificationsRepository.create({
+      name,
+      description,
+   });
+  }
+}
+
+
+export{ CreateSpecificationService }; 
